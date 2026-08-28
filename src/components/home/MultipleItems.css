@@ -1,0 +1,15 @@
+.nft-slide {
+  padding: 0 12px;
+}
+
+.slider-container .slick-slide > div {
+  height: 100%;
+}
+.slick-arrow {
+  -o-transition: 0.2s ease;
+  -ms-transition: 0.2s ease;
+  -moz-transition: 0.2s ease;
+  -webkit-transition: 0.2s ease;
+  transition: 0.2s ease;
+  outline: none;
+}
