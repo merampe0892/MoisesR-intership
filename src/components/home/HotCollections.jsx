@@ -1,5 +1,3 @@
-import React from "react";
-
 import MultipleItems from './MultipleItems'
 
 const HotCollections = () => {
@@ -15,7 +13,6 @@ const HotCollections = () => {
             </div>
           </div>
           <MultipleItems />
-        
         </div>
       </div>
     </section>
