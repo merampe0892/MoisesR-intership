@@ -41,7 +41,6 @@
   opacity: 1;
 }
 
-/* ---- Skeleton shimmer animation ---- */
 .slide-skeleton {
   background: linear-gradient(
     90deg,
