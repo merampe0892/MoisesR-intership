@@ -10,24 +10,33 @@
   padding: 0 12px;
 }
 
-.slick-prev,
-.slick-next {
+.nft_coll {
+  text-align: center;
+}
+
+.nft_wrap {
+  height: 200%;
+}
+
+.slick-arrow,
+.slick-arrow {
+  display: block;
   z-index: 10;
   width: 40px;
-  height: 40px;
+  height: 200px;
 }
 
 .slick-prev {
-  left: -20px;
+  left: -10px;
 }
 
 .slick-next {
-  right: -20px;
+  right: -10px;
 }
 
 .slick-prev:before,
 .slick-next:before {
-  color: rgb(114, 114, 114);
+  color: rgb(173, 170, 170);
   font-size: 30px;
   opacity: 1;
 }
@@ -55,7 +64,6 @@
   }
 }
 
-/* Image placeholder — matches .nft_wrap img size */
 .nft-image-skeleton {
   width: 100%;
   aspect-ratio: 1 / 1;
@@ -63,14 +71,12 @@
   border-radius: 12px;
 }
 
-/* Author profile pic placeholder — matches .pp-coll */
 .nft-coll-skeleton {
   width: 50px;
   height: 50px;
   border-radius: 50%;
 }
 
-/* Title + code line placeholders */
 .nft-info-skeleton {
   height: 16px;
   border-radius: 6px;
@@ -83,9 +89,4 @@
 
 .nft-info-skeleton:last-child {
   width: 40%;
-}
-
-/* Hide the check icon badge while loading */
-.nft_coll_pp .fa-check {
-  visibility: hidden;
 }
