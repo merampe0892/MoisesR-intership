@@ -17,7 +17,6 @@ function MultipleItems() {
         "https://us-central1-nft-cloud-functions.cloudfunctions.net/hotCollections",
       );
       setNfts(response.data);
-      console.log(response.data)
       setIsLoading(false);
     };
 
