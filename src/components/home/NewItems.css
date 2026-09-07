@@ -1,0 +1,48 @@
+/* .slider-slider {
+  position: relative;
+} */
+
+.slick-arrow,
+.slick-arrow {
+  display: block;
+  z-index: 10;
+  width: 40px;
+  height: 200px;
+}
+
+.slick-prev {
+  left: -10px;
+}
+
+.slick-next {
+  right: -10px;
+}
+
+.slick-prev:before,
+.slick-next:before {
+  color: rgb(173, 170, 170);
+  font-size: 30px;
+  opacity: 1;
+}
+
+.slick-track {
+  transform: translate3d(-1306px, 0px, 0px);
+  transition: all;
+  width: 4898px;
+}
+
+/* .slick-slide {
+  width: 316.5px;
+    margin-right: 10px;
+}
+
+.nft-item {
+      background: #fff;
+    border: 1px solid #ddd;
+    border-radius: 15px;
+    -moz-border-radius: 15px;
+    -webkit-border-radius: 15px;
+    margin-bottom: 25px;
+    padding: 20px;
+    position: relative;
+} */
