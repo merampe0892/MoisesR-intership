@@ -83,7 +83,7 @@ function MultipleItems() {
               <div className="nft-slide">
                 <div className="nft_coll">
                   <div className="nft_wrap">
-                    <Link to="/item-details">
+                    <Link to={`/item-details/${nft.id}`}>
                       <img
                         src={nft.nftImage}
                         className="lazy img-fluid"
