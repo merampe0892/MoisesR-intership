@@ -7,6 +7,7 @@ import OwlCarousel from "react-owl-carousel";
 import "owl.carousel/dist/assets/owl.carousel.css";
 import "owl.carousel/dist/assets/owl.theme.default.css";
 import "./NewItems.css";
+import Countdown from "../UI/Countdown";
 
 window.$ = $;
 window.jQuery = $;
@@ -36,7 +37,6 @@ const NewItems = () => {
         "https://us-central1-nft-cloud-functions.cloudfunctions.net/newItems",
       );
       setItems(response.data);
-      console.log(response.data);
       setLoading(false);
     };
 
@@ -44,7 +44,7 @@ const NewItems = () => {
   }, []);
 
   const loadingItems = Array.from({ length: 4 }, (_, index) => (
-    <div className="skeleton-card" key={index}>
+    <div className="col-lg-3 col-md-6 skeleton-card" key={index}>
       <div className="nft__item">
         <div className="skeleton-author-wrap">
           <div className="skeleton skeleton-author"></div>
@@ -79,7 +79,7 @@ const NewItems = () => {
             <i className="fa fa-check"></i>
           </Link>
         </div>
-        <div className="de_countdown">5h 30m 32s</div>
+        {item.expiryDate && <Countdown expiryDate={item.expiryDate} />}
 
         <div className="nft__item_wrap">
           <div className="nft__item_extra">
@@ -123,24 +123,29 @@ const NewItems = () => {
   ));
 
   return (
-    <section id="section-items" className="no-bottom">
-      <div className="container">
-        <div className="row">
-          <div className="col-lg-12">
-            <div className="text-center">
-              <h2>New Items</h2>
-              <div className="small-border bg-color-2"></div>
-            </div>
-          </div>
-          <div className="col-lg-12">
-            <OwlCarousel {...carouselOptions}>
-              {items.length > 0 ? itemCards : loadingItems}
-            </OwlCarousel>
+  <section id="section-items" className="no-bottom">
+    <div className="container">
+      <div className="row">
+        <div className="col-lg-12">
+          <div className="text-center">
+            <h2>New Items</h2>
+            <div className="small-border bg-color-2"></div>
           </div>
         </div>
+
+        <div className="col-lg-12">
+          {loading ? (
+            <div className="row">{loadingItems}</div>
+          ) : (
+            <OwlCarousel key={items.length} {...carouselOptions}>
+              {itemCards}
+            </OwlCarousel>
+          )}
+        </div>
       </div>
-    </section>
-  );
+    </div>
+  </section>
+);
 };
 
 export default NewItems;
