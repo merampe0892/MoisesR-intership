@@ -2,7 +2,7 @@ import React from "react";
 import axios from "axios";
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
-import "./TopSellers.css"
+import "./TopSellers.css";
 
 const TopSellers = () => {
   const [sellers, setSellers] = useState([]);
@@ -22,18 +22,18 @@ const TopSellers = () => {
     fetchTopSellersData();
   }, []);
 
-const loadingAuthors = Array.from({ length: 12 }, (_, index) => (
-  <li className="authors-li" key={index}>
-    <div className="skeleton-author-wrap author_list_pp">
-      <div className="skeleton skeleton-author"></div>
-      <i className="fa fa-check skeleton-check"></i>
-    </div>
-    <div className="author_list_info skeleton-info">
-      <div className="skeleton skeleton-author-name"></div>
-      <div className="skeleton skeleton-author-price"></div>
-    </div>
-  </li>
-));
+  const loadingAuthors = Array.from({ length: 12 }, (_, index) => (
+    <li className="authors-li" key={index}>
+      <div className="skeleton-author-wrap author_list_pp">
+        <div className="skeleton skeleton-author"></div>
+        <i className="fa fa-check skeleton-check"></i>
+      </div>
+      <div className="author_list_info skeleton-info">
+        <div className="skeleton skeleton-author-name"></div>
+        <div className="skeleton skeleton-author-price"></div>
+      </div>
+    </li>
+  ));
 
   return (
     <section id="section-popular" className="pb-5">
@@ -46,32 +46,30 @@ const loadingAuthors = Array.from({ length: 12 }, (_, index) => (
             </div>
           </div>
           <div className="col-md-12">
-            {loading ? (
-              <ol className="author_list">{loadingAuthors}</ol>
-            ) : (
-              <ol className="author_list">
-                {sellers.map((seller) => (
-                  <li key={seller.id}>
-                    <div className="author_list_pp">
-                      <Link to={`/author/${seller.authorId}`}>
-                        <img
-                          className="lazy pp-author"
-                          src={seller.authorImage}
-                          alt=""
-                        />
-                        <i className="fa fa-check"></i>
-                      </Link>
-                    </div>
-                    <div className="author_list_info">
-                      <Link to={`/author/${seller.authorId}`}>
-                        {seller.authorName}
-                      </Link>
-                      <span>{seller.price}</span>
-                    </div>
-                  </li>
-                ))}
-              </ol>
-            )}
+            <ol className="author_list">
+              {loading
+                ? loadingAuthors
+                : sellers.map((seller) => (
+                    <li key={seller.id}>
+                      <div className="author_list_pp">
+                        <Link to={`/author/${seller.authorId}`}>
+                          <img
+                            className="lazy pp-author"
+                            src={seller.authorImage}
+                            alt=""
+                          />
+                          <i className="fa fa-check"></i>
+                        </Link>
+                      </div>
+                      <div className="author_list_info">
+                        <Link to={`/author/${seller.authorId}`}>
+                          {seller.authorName}
+                        </Link>
+                        <span>{seller.price}</span>
+                      </div>
+                    </li>
+                  ))}
+            </ol>
           </div>
         </div>
       </div>
