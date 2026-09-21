@@ -1,8 +1,40 @@
 import React from "react";
+import axios from "axios";
+import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
-import AuthorImage from "../../images/author_thumbnail.jpg";
+import "./TopSellers.css"
 
 const TopSellers = () => {
+  const [sellers, setSellers] = useState([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const fetchTopSellersData = async () => {
+      const response = await axios.get(
+        "https://us-central1-nft-cloud-functions.cloudfunctions.net/topSellers",
+      );
+
+      console.log(response.data);
+      setSellers(response.data);
+      setLoading(false);
+    };
+
+    fetchTopSellersData();
+  }, []);
+
+const loadingAuthors = Array.from({ length: 12 }, (_, index) => (
+  <li className="authors-li" key={index}>
+    <div className="skeleton-author-wrap author_list_pp">
+      <div className="skeleton skeleton-author"></div>
+      <i className="fa fa-check skeleton-check"></i>
+    </div>
+    <div className="author_list_info skeleton-info">
+      <div className="skeleton skeleton-author-name"></div>
+      <div className="skeleton skeleton-author-price"></div>
+    </div>
+  </li>
+));
+
   return (
     <section id="section-popular" className="pb-5">
       <div className="container">
@@ -14,26 +46,32 @@ const TopSellers = () => {
             </div>
           </div>
           <div className="col-md-12">
-            <ol className="author_list">
-              {new Array(12).fill(0).map((_, index) => (
-                <li key={index}>
-                  <div className="author_list_pp">
-                    <Link to="/author">
-                      <img
-                        className="lazy pp-author"
-                        src={AuthorImage}
-                        alt=""
-                      />
-                      <i className="fa fa-check"></i>
-                    </Link>
-                  </div>
-                  <div className="author_list_info">
-                    <Link to="/author">Monica Lucas</Link>
-                    <span>2.1 ETH</span>
-                  </div>
-                </li>
-              ))}
-            </ol>
+            {loading ? (
+              <ol className="author_list">{loadingAuthors}</ol>
+            ) : (
+              <ol className="author_list">
+                {sellers.map((seller) => (
+                  <li key={seller.id}>
+                    <div className="author_list_pp">
+                      <Link to={`/author/${seller.authorId}`}>
+                        <img
+                          className="lazy pp-author"
+                          src={seller.authorImage}
+                          alt=""
+                        />
+                        <i className="fa fa-check"></i>
+                      </Link>
+                    </div>
+                    <div className="author_list_info">
+                      <Link to={`/author/${seller.authorId}`}>
+                        {seller.authorName}
+                      </Link>
+                      <span>{seller.price}</span>
+                    </div>
+                  </li>
+                ))}
+              </ol>
+            )}
           </div>
         </div>
       </div>
