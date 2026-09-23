@@ -23,9 +23,9 @@ const TopSellers = () => {
 
   const loadingAuthors = Array.from({ length: 12 }, (_, index) => (
     <li className="authors-li" key={index}>
-      <div className="skeleton-author-wrap author_list_pp">
-        <div className="top-seller-skeleton skeleton-author"></div>
-        <i className="fa fa-check skeleton-check"></i>
+      <div className="top-seller-skeleton-wrap author_list_pp">
+        <div className="top-seller-skeleton top-seller-skeleton-author"></div>
+        <i className="fa fa-check top-seller-skeleton-check"></i>
       </div>
       <div className="author_list_info skeleton-info">
         <div className="top-seller-skeleton skeleton-author-name"></div>

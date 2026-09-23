@@ -31,10 +31,10 @@
     rgba(0, 0, 0, 0.06) 63%
   );
   background-size: 400% 100%;
-  animation: skeleton-shimmer 1.4s ease infinite;
+  animation: top-seller-skeleton-shimmer 1.4s ease infinite;
 }
 
-@keyframes skeleton-shimmer {
+@keyframes top-seller-skeleton-shimmer {
   0% {
     background-position: 100% 50%;
   }
@@ -43,18 +43,18 @@
   }
 }
 
-.author_list li .skeleton-author-wrap {
+.author_list li .top-seller-skeleton-wrap{
   position: relative;
   flex-shrink: 0;
 }
 
-.skeleton-author {
+.top-seller-skeleton-author {
   width: 50px;
   height: 50px;
   border-radius: 50%;
 }
 
-.skeleton-check {
+.top-seller-skeleton-check {
   position: absolute;
   bottom: 0;
   right: 0;
