@@ -18,6 +18,7 @@ function MultipleItems() {
       );
       setNfts(response.data);
       setIsLoading(false);
+      console.log(response.data)
     };
 
     getNftsData();
@@ -83,7 +84,7 @@ function MultipleItems() {
               <div className="nft-slide">
                 <div className="nft_coll">
                   <div className="nft_wrap">
-                    <Link to={`/item-details/${nft.id}`}>
+                    <Link to={`/item-details/${nft.nftId}`}>
                       <img
                         src={nft.nftImage}
                         className="lazy img-fluid"
@@ -92,7 +93,7 @@ function MultipleItems() {
                     </Link>
                   </div>
                   <div className="nft_coll_pp">
-                    <Link to="/author">
+                    <Link to={`/author/${nft.authorId}`}>
                       <img
                         className="lazy pp-coll"
                         src={nft.authorImage}
