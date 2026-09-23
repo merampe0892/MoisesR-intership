@@ -18,7 +18,6 @@ function MultipleItems() {
       );
       setNfts(response.data);
       setIsLoading(false);
-      console.log(response.data)
     };
 
     getNftsData();
