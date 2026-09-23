@@ -123,29 +123,29 @@ const NewItems = () => {
   ));
 
   return (
-  <section id="section-items" className="no-bottom">
-    <div className="container">
-      <div className="row">
-        <div className="col-lg-12">
-          <div className="text-center">
-            <h2>New Items</h2>
-            <div className="small-border bg-color-2"></div>
+    <section id="section-items" className="no-bottom">
+      <div className="container">
+        <div className="row">
+          <div className="col-lg-12">
+            <div className="text-center">
+              <h2>New Items</h2>
+              <div className="small-border bg-color-2"></div>
+            </div>
+          </div>
+
+          <div className="col-lg-12">
+            {loading ? (
+              <div className="row">{loadingItems}</div>
+            ) : (
+              <OwlCarousel key={items.length} {...carouselOptions}>
+                {itemCards}
+              </OwlCarousel>
+            )}
           </div>
         </div>
-
-        <div className="col-lg-12">
-          {loading ? (
-            <div className="row">{loadingItems}</div>
-          ) : (
-            <OwlCarousel key={items.length} {...carouselOptions}>
-              {itemCards}
-            </OwlCarousel>
-          )}
-        </div>
       </div>
-    </div>
-  </section>
-);
+    </section>
+  );
 };
 
 export default NewItems;
