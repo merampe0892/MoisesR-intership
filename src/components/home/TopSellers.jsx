@@ -14,7 +14,6 @@ const TopSellers = () => {
         "https://us-central1-nft-cloud-functions.cloudfunctions.net/topSellers",
       );
 
-      console.log(response.data);
       setSellers(response.data);
       setLoading(false);
     };
@@ -25,12 +24,12 @@ const TopSellers = () => {
   const loadingAuthors = Array.from({ length: 12 }, (_, index) => (
     <li className="authors-li" key={index}>
       <div className="skeleton-author-wrap author_list_pp">
-        <div className="skeleton skeleton-author"></div>
+        <div className="top-seller-skeleton skeleton-author"></div>
         <i className="fa fa-check skeleton-check"></i>
       </div>
       <div className="author_list_info skeleton-info">
-        <div className="skeleton skeleton-author-name"></div>
-        <div className="skeleton skeleton-author-price"></div>
+        <div className="top-seller-skeleton skeleton-author-name"></div>
+        <div className="top-seller-skeleton skeleton-author-price"></div>
       </div>
     </li>
   ));
