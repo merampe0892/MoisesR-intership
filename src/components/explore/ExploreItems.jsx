@@ -9,6 +9,7 @@ import NftCardSkeleton from "../UI/NftCardSkeleton";
 const ExploreItems = () => {
   const [nfts, setNfts] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [originalNfts, setOriginalNfts] = useState([]);
 
   useEffect(() => {
     const fetchNftsData = async () => {
@@ -17,16 +18,35 @@ const ExploreItems = () => {
       );
 
       setNfts(response.data);
+      setOriginalNfts(response.data);
       setLoading(false);
     };
 
     fetchNftsData();
   }, []);
 
+  function filterNfts(filter) {
+    console.log(filter);
+    if (filter === "price_low_to_high") {
+      setNfts(nfts.slice().sort((a, b) => a.price - b.price));
+    }
+    if (filter === "price_high_to_low") {
+      setNfts(nfts.slice().sort((a, b) => b.price - a.price));
+    }
+    if (filter === "likes_high_to_low") {
+      setNfts(nfts.slice().sort((a, b) => b.likes - a.likes));
+    }
+    if (filter === "") setNfts(originalNfts.slice());
+  }
+
   return (
     <>
       <div>
-        <select id="filter-items" defaultValue="">
+        <select
+          id="filter-items"
+          defaultValue=""
+          onChange={(event) => filterNfts(event.target.value)}
+        >
           <option value="">Default</option>
           <option value="price_low_to_high">Price, Low to High</option>
           <option value="price_high_to_low">Price, High to Low</option>
