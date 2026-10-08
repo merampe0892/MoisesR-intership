@@ -19,7 +19,6 @@ const ExploreItems = () => {
       );
 
       setNfts(response.data);
-      console.log(response.data)
       setOriginalNfts(response.data);
       setLoading(false);
     };
