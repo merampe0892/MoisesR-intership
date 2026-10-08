@@ -10,6 +10,7 @@ const ExploreItems = () => {
   const [nfts, setNfts] = useState([]);
   const [loading, setLoading] = useState(true);
   const [originalNfts, setOriginalNfts] = useState([]);
+  const [visibleCount, setVisibleCount] = useState(8);
 
   useEffect(() => {
     const fetchNftsData = async () => {
@@ -18,6 +19,7 @@ const ExploreItems = () => {
       );
 
       setNfts(response.data);
+      console.log(response.data)
       setOriginalNfts(response.data);
       setLoading(false);
     };
@@ -36,7 +38,14 @@ const ExploreItems = () => {
     if (filter === "likes_high_to_low") {
       setNfts(nfts.slice().sort((a, b) => b.likes - a.likes));
     }
-    if (filter === "") setNfts(originalNfts.slice());
+    if (filter === "") {
+      setNfts(originalNfts.slice());
+    }
+    setVisibleCount(8);
+  };
+
+  function loadMore() {
+    setVisibleCount((prev) => prev + 4)
   }
 
   return (
@@ -63,7 +72,7 @@ const ExploreItems = () => {
           />
         </div>
       ) : (
-        nfts.map((nft) => (
+        nfts.slice(0, visibleCount).map((nft) => (
           <div
             key={nft.id}
             className="col-lg-3 col-md-6 col-sm-6 col-xs-12"
@@ -83,11 +92,20 @@ const ExploreItems = () => {
           </div>
         ))
       )}
+
+      {visibleCount < nfts.length && (
       <div className="col-md-12 text-center">
-        <Link to="" id="loadmore" className="btn-main lead">
+        <Link to="" id="loadmore" className="btn-main lead" 
+        onClick={(e) => {
+          e.preventDefault();
+          loadMore();
+        }}
+        >
           Load more
         </Link>
       </div>
+      )}
+      
     </>
   );
 };
