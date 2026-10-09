@@ -1,9 +1,26 @@
 import React from "react";
+import axios from "axios";
+import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import AuthorImage from "../../images/author_thumbnail.jpg";
 import nftImage from "../../images/nftImage.jpg";
 
 const AuthorItems = () => {
+
+  const [authors, setAuthors] = useState([]);
+  
+    useEffect(() => {
+      const fetchAuthorsData = async (authorId) => {
+        const response = await axios.get(
+          `https://us-central1-nft-cloud-functions.cloudfunctions.net/authors?author`,
+        );
+  
+        setAuthors(response.data);
+        console.log(response.data);
+      };
+  
+      fetchAuthorsData();
+    }, []);
   return (
     <div className="de_tab_content">
       <div className="tab-1">
@@ -23,15 +40,15 @@ const AuthorItems = () => {
                       <button>Buy Now</button>
                       <div className="nft__item_share">
                         <h4>Share</h4>
-                        <a href="" target="_blank" rel="noreferrer">
+                        <Link to="" target="_blank" rel="noreferrer">
                           <i className="fa fa-facebook fa-lg"></i>
-                        </a>
-                        <a href="" target="_blank" rel="noreferrer">
+                        </Link>
+                        <Link to="" target="_blank" rel="noreferrer">
                           <i className="fa fa-twitter fa-lg"></i>
-                        </a>
-                        <a href="">
+                        </Link>
+                        <Link to="">
                           <i className="fa fa-envelope fa-lg"></i>
-                        </a>
+                        </Link>
                       </div>
                     </div>
                   </div>

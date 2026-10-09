@@ -3,7 +3,18 @@ import { Link } from "react-router-dom";
 import Countdown from "../UI/Countdown";
 import "./NewItems.css";
 
-const Nfts = ({ id, authorId, authorName, authorImage, expiryDate, nftId, nftImage, title, price, likes }) => {
+const Nfts = ({
+  id,
+  authorId,
+  authorName,
+  authorImage,
+  expiryDate,
+  nftId,
+  nftImage,
+  title,
+  price,
+  likes,
+}) => {
   return (
     <>
       <div key={id}>
@@ -27,25 +38,21 @@ const Nfts = ({ id, authorId, authorName, authorImage, expiryDate, nftId, nftIma
                 <button>Buy Now</button>
                 <div className="nft__item_share">
                   <h4>Share</h4>
-                  <a href="" target="_blank" rel="noreferrer">
+                  <Link to="" target="_blank" rel="noreferrer">
                     <i className="fa fa-facebook fa-lg"></i>
-                  </a>
-                  <a href="" target="_blank" rel="noreferrer">
+                  </Link>
+                  <Link to="" target="_blank" rel="noreferrer">
                     <i className="fa fa-twitter fa-lg"></i>
-                  </a>
-                  <a href="">
+                  </Link>
+                  <Link to="">
                     <i className="fa fa-envelope fa-lg"></i>
-                  </a>
+                  </Link>
                 </div>
               </div>
             </div>
 
             <Link to={`/item-details/${nftId}`}>
-              <img
-                src={nftImage}
-                className="lazy nft__item_preview"
-                alt=""
-              />
+              <img src={nftImage} className="lazy nft__item_preview" alt="" />
             </Link>
           </div>
           <div className="nft__item_info">
