@@ -1,7 +1,6 @@
 import React from "react";
 import axios from "axios";
 import { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
 import Nfts from "../home/Nfts";
 import SkeletonGrid from "../UI/SkeletonGrid";
 import NftCardSkeleton from "../UI/NftCardSkeleton";
@@ -9,7 +8,6 @@ import NftCardSkeleton from "../UI/NftCardSkeleton";
 const ExploreItems = () => {
   const [nfts, setNfts] = useState([]);
   const [loading, setLoading] = useState(true);
-  const [originalNfts, setOriginalNfts] = useState([]);
   const [visibleCount, setVisibleCount] = useState(8);
 
   useEffect(() => {
@@ -19,32 +17,31 @@ const ExploreItems = () => {
       );
 
       setNfts(response.data);
-      setOriginalNfts(response.data);
       setLoading(false);
     };
 
     fetchNftsData();
   }, []);
 
-  function filterNfts(filter) {
-    console.log(filter);
-    if (filter === "price_low_to_high") {
-      setNfts(nfts.slice().sort((a, b) => a.price - b.price));
+   async function filterNfts(filter) {
+    setLoading(true);
+
+    try {
+      const response = await axios.get(
+        `https://us-central1-nft-cloud-functions.cloudfunctions.net/explore?filter=${filter}`,
+      );
+
+      setNfts(response.data);
+      setVisibleCount(8);
+    } catch (error) {
+      console.error("Failed to fetch NFTs:", error);
+    } finally {
+      setLoading(false);
     }
-    if (filter === "price_high_to_low") {
-      setNfts(nfts.slice().sort((a, b) => b.price - a.price));
-    }
-    if (filter === "likes_high_to_low") {
-      setNfts(nfts.slice().sort((a, b) => b.likes - a.likes));
-    }
-    if (filter === "") {
-      setNfts(originalNfts.slice());
-    }
-    setVisibleCount(8);
-  };
+  }
 
   function loadMore() {
-    setVisibleCount((prev) => prev + 4)
+    setVisibleCount((prev) => prev + 4);
   }
 
   return (
@@ -92,19 +89,17 @@ const ExploreItems = () => {
         ))
       )}
 
-      {visibleCount < nfts.length && (
-      <div className="col-md-12 text-center">
-        <Link to="" id="loadmore" className="btn-main lead" 
-        onClick={(e) => {
-          e.preventDefault();
-          loadMore();
-        }}
-        >
-          Load more
-        </Link>
-      </div>
+      {!loading && visibleCount < nfts.length && (
+        <div className="col-md-12 text-center">
+          <button
+            id="loadmore"
+            className="btn-main lead"
+            onClick={loadMore}
+          >
+            Load more
+          </button>
+        </div>
       )}
-      
     </>
   );
 };
