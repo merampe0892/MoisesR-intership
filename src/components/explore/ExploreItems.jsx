@@ -23,7 +23,7 @@ const ExploreItems = () => {
     fetchNftsData();
   }, []);
 
-   async function filterNfts(filter) {
+  async function filterNfts(filter) {
     setLoading(true);
 
     try {
@@ -91,11 +91,7 @@ const ExploreItems = () => {
 
       {!loading && visibleCount < nfts.length && (
         <div className="col-md-12 text-center">
-          <button
-            id="loadmore"
-            className="btn-main lead"
-            onClick={loadMore}
-          >
+          <button id="loadmore" className="btn-main lead" onClick={loadMore}>
             Load more
           </button>
         </div>
