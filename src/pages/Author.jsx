@@ -4,21 +4,23 @@ import { useState, useEffect } from "react";
 import AuthorBanner from "../images/author_banner.jpg";
 import AuthorItems from "../components/author/AuthorItems";
 import { Link, useParams } from "react-router-dom";
+import SkeletonGrid from "../components/UI/SkeletonGrid";
+import NftCardSkeleton from "../components/UI/NftCardSkeleton";
+import AuthorSkeleton from "../components/UI/AuthorSkeleton";
 
 const Author = () => {
   const [author, setAuthor] = useState({});
   const { authorId } = useParams();
-
-
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     const fetchAuthorsData = async () => {
-      const { data } = await axios.get(
+      const response = await axios.get(
         `https://us-central1-nft-cloud-functions.cloudfunctions.net/authors?author=${authorId}`,
       );
 
-      setAuthor(data);
-      console.log(data.nftCollection)
+      setAuthor(response.data);
+      setLoading(false);
     };
 
     fetchAuthorsData();
@@ -28,8 +30,6 @@ const Author = () => {
     <div id="wrapper">
       <div className="no-bottom no-top" id="content">
         <div id="top"></div>
-
-       
 
         <section
           id="profile_banner"
@@ -42,44 +42,59 @@ const Author = () => {
         <section aria-label="section">
           <div className="container">
             <div className="row">
-              <div className="col-md-12">
-                <div className="d_profile de-flex">
-                  <div className="de-flex-col">
-                    <div className="profile_avatar">
-                      <img src={author.authorImage} alt="" />
-                      <i className="fa fa-check"></i>
-                      <div className="profile_name">
-                        <h4>
-                          {author.authorName}
-                          <span className="profile_username">@{author.tag}</span>
-                          <span id="wallet" className="profile_wallet">
-                            {author.address}
-                          </span>
-                          <button id="btn_copy" title="Copy Text">
-                            Copy
-                          </button>
-                        </h4>
+              {loading ? (
+                <div className="col-md-12">
+                  <AuthorSkeleton />
+                  <div className="row">
+                    <SkeletonGrid
+                      count={8}
+                      className="col-lg-3 col-md-6"
+                      component={NftCardSkeleton}
+                    />
+                  </div>
+                </div>
+              ) : (
+                <div className="col-md-12">
+                  <div className="d_profile de-flex">
+                    <div className="de-flex-col">
+                      <div className="profile_avatar">
+                        <img src={author.authorImage} alt="" />
+                        <i className="fa fa-check"></i>
+                        <div className="profile_name">
+                          <h4>
+                            {author.authorName}
+                            <span className="profile_username">
+                              @{author.tag}
+                            </span>
+                            <span id="wallet" className="profile_wallet">
+                              {author.address}
+                            </span>
+                            <button id="btn_copy" title="Copy Text">
+                              Copy
+                            </button>
+                          </h4>
+                        </div>
+                      </div>
+                    </div>
+                    <div className="profile_follow de-flex">
+                      <div className="de-flex-col">
+                        <div className="profile_follower">
+                          {author.followers} followers
+                        </div>
+                        <Link to="#" className="btn-main">
+                          Follow
+                        </Link>
                       </div>
                     </div>
                   </div>
-                  <div className="profile_follow de-flex">
-                    <div className="de-flex-col">
-                      <div className="profile_follower">{author.followers} followers</div>
-                      <Link to="#" className="btn-main">
-                        Follow
-                      </Link>
-                    </div>
+                  <div className="de_tab tab_simple">
+                    <AuthorItems
+                      authorImage={author.authorImage}
+                      nftCollections={author.nftCollection}
+                    />
                   </div>
                 </div>
-              </div>
-
-              <div className="col-md-12">
-                <div className="de_tab tab_simple">
-                  <AuthorItems 
-                    authorImage={author.authorImage}
-                    nftCollections={author.nftCollection}/>
-                </div>
-              </div>
+              )}
             </div>
           </div>
         </section>
