@@ -1,0 +1,37 @@
+.skeleton-box {
+  width: 150px;
+  height: 150px;
+  border-radius: 50%;
+}
+
+.skeleton-author {
+  width: 200px;
+  height: 20px;
+  border-radius: 4px;
+  margin-bottom: 0px;
+}
+
+.skeleton-username {
+  width: 100px;
+  height: 15px;
+  border-radius: 4px;
+}
+
+.skeleton-wallet {
+  width: 150px;
+  height: 15px;
+  border-radius: 4px;
+}
+
+.profile_name {
+  display: flex;
+  flex-direction: column;
+  margin-top: 20px;
+}
+
+.skeleton-follower {
+  width: 150px;
+  height: 40px;
+  border-radius: 4px;
+  margin-right: 20px;
+}
