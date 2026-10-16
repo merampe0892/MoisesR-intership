@@ -1,9 +1,9 @@
 import React from "react";
 import axios from "axios";
 import { useState, useEffect } from "react";
+import { useParams } from "react-router-dom";
 import AuthorBanner from "../images/author_banner.jpg";
 import AuthorItems from "../components/author/AuthorItems";
-import { Link, useParams } from "react-router-dom";
 import SkeletonGrid from "../components/UI/SkeletonGrid";
 import NftCardSkeleton from "../components/UI/NftCardSkeleton";
 import AuthorSkeleton from "../components/UI/AuthorSkeleton";
@@ -12,6 +12,7 @@ const Author = () => {
   const [author, setAuthor] = useState({});
   const { authorId } = useParams();
   const [loading, setLoading] = useState(true);
+  const [isFollowing, setIsFollowing] = useState(false);
 
   useEffect(() => {
     const fetchAuthorsData = async () => {
@@ -25,6 +26,16 @@ const Author = () => {
 
     fetchAuthorsData();
   }, [authorId]);
+
+  const handleFollow = () => {
+    setIsFollowing((previousIsFollowing) => !previousIsFollowing);
+    setAuthor((previousAuthor) => ({
+      ...previousAuthor,
+      followers: isFollowing
+        ? previousAuthor.followers - 1
+        : previousAuthor.followers + 1,
+    }));
+  };
 
   return (
     <div id="wrapper">
@@ -81,9 +92,13 @@ const Author = () => {
                         <div className="profile_follower">
                           {author.followers} followers
                         </div>
-                        <Link to="#" className="btn-main">
-                          Follow
-                        </Link>
+
+                        <button
+                          className={`btn-main follow-btn ${isFollowing ? "following" : ""}`}
+                          onClick={handleFollow}
+                        >
+                          {isFollowing ? "Unfollow" : "Follow"}
+                        </button>
                       </div>
                     </div>
                   </div>
