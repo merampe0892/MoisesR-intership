@@ -27,8 +27,6 @@ const ItemDetails = () => {
     fetchNftDetails();
   }, [nftId]);
 
-  console.log(nftDetails);
-
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
