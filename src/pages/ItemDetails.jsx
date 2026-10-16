@@ -4,6 +4,8 @@ import { Link } from "react-router-dom";
 import AuthorImage from "../images/author_thumbnail.jpg";
 import nftImage from "../images/nftImage.jpg";
 
+//now we start this new one
+
 const ItemDetails = () => {
   useEffect(() => {
     window.scrollTo(0, 0);
