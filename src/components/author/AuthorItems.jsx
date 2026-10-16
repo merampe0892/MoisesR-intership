@@ -1,7 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 
-const AuthorItems = ({ authorImage, nftCollections = [] }) => {
+const AuthorItems = ({ authorId, authorImage, nftCollections = [] }) => {
   return (
     <div className="de_tab_content">
       <div className="tab-1">
@@ -10,7 +10,7 @@ const AuthorItems = ({ authorImage, nftCollections = [] }) => {
             <div className="col-lg-3 col-md-6 col-sm-6 col-xs-12" key={nftCollection.id}>
               <div className="nft__item">
                 <div className="author_list_pp">
-                  <Link to="">
+                  <Link to={`/author/${authorId}`}>
                     <img className="lazy" src={authorImage} alt="" />
                     <i className="fa fa-check"></i>
                   </Link>
@@ -33,7 +33,7 @@ const AuthorItems = ({ authorImage, nftCollections = [] }) => {
                       </div>
                     </div>
                   </div>
-                  <Link to="/item-details">
+                  <Link to={`/item-details/${nftCollection.nftId}`}>
                     <img
                       src={nftCollection.nftImage}
                       className="lazy nft__item_preview"
@@ -42,7 +42,7 @@ const AuthorItems = ({ authorImage, nftCollections = [] }) => {
                   </Link>
                 </div>
                 <div className="nft__item_info">
-                  <Link to="/item-details">
+                  <Link to={`/item-details/${nftCollection.nftId}`}>
                     <h4>{nftCollection.title}</h4>
                   </Link>
                   <div className="nft__item_price">{nftCollection.price} ETH</div>
