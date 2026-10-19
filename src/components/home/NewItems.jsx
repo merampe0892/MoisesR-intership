@@ -70,7 +70,7 @@ const NewItems = () => {
             </div>
           </div>
 
-          <div className="col-lg-12">
+          <div className="col-lg-12" data-aos="fade" data-aos-delay="10">
             {loading ? (
               <div className="row">
                 <SkeletonGrid

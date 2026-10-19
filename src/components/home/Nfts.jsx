@@ -17,7 +17,7 @@ const Nfts = ({
 }) => {
   return (
     <>
-      <div key={id}>
+      <div key={id} data-aos="fade-in">
         <div className="nft__item">
           <div className="author_list_pp">
             <Link
