@@ -79,7 +79,7 @@ function MultipleItems() {
       ) : nfts.length > 0 ? (
         <Slider {...settings}>
           {nfts.map((nft) => (
-            <div key={nft.id}>
+            <div key={nft.id} data-aos="fade" data-aos-delay="10">
               <div className="nft-slide">
                 <div className="nft_coll">
                   <div className="nft_wrap">
